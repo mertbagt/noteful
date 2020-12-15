@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import DateError from '../DateError/DateError'
 import PropTypes from 'prop-types'
 import Note from '../Note/Note'
 import CircleButton from '../CircleButton/CircleButton'
@@ -16,6 +17,8 @@ export default class NoteListMain extends React.Component {
   }
   static contextType = ApiContext
 
+  handleDeleteNote = () => {}
+
   render() {
     const { folderId } = this.props.match.params
     const { notes=[] } = this.context
@@ -25,11 +28,14 @@ export default class NoteListMain extends React.Component {
         <ul>
           {notesForFolder.map(note =>
             <li key={note.id}>
-              <Note
-                id={note.id}
-                name={note.name}
-                modified={note.modified}
-              />
+              <DateError>
+                <Note
+                  id={note.id}
+                  name={note.name}
+                  modified={note.modified}
+                  onDeleteNote={this.handleDeleteNote}
+                />
+              </DateError>
             </li>
           )}
         </ul>

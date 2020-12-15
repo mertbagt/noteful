@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import ApiContext from '../ApiContext'
 import config from '../config'
 import ValidationError from "../ValidationError/ValidationError";
@@ -186,4 +187,10 @@ export default class AddNote extends React.Component {
           </section>  
         )
     }
+}
+
+AddNote.propTypes = {
+  history: PropTypes.object,
+  location: PropTypes.object,
+  match: PropTypes.object
 }

@@ -5,11 +5,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import PropTypes from 'prop-types';
 import ApiContext from '../ApiContext'
 import config from '../config'
-import DateError from '../DateError/DateError'
 import './Note.css'
 
 export default class Note extends React.Component {
   static defaultProps ={
+    id: '',
+    modified: '01-01-2020',
+    name: '',
     onDeleteNote: () => {},
   }
   static contextType = ApiContext;
@@ -61,11 +63,9 @@ export default class Note extends React.Component {
           <div className='Note__dates-modified'>
             Modified
             {' '}
-            <DateError>
               <span className='Date'>
-                {format(modified, 'Do MMM YYYY')}
+                {format(new Date(modified), 'do MMM yyyy')}
               </span>
-            </DateError>
           </div>
         </div>
       </div>
@@ -73,15 +73,15 @@ export default class Note extends React.Component {
   }
 }
 
-Note.defaultProps = {
+Note.propTypes = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   modified: (props, propName, componentName) => {
     const prop = props[propName];
-    if(!prop) {
-      return new Error(`${propName} is required in ${componentName}. Validation Failed`)
-    }
-    if (typeof prop != 'string' && typeof prop != 'string') {
+//    if(!prop) {
+//      return new Error(`${propName} is required in ${componentName}. Validation Failed`)
+//    }
+    if (typeof prop != 'number' && typeof prop != 'string') {
       return new Error(`${propName} is expected to be a number or a string in ${componentName}. ${typeof prop} found.`)
     }
   }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './DateError.css'
 
 class DateError extends Component {
     constructor(props) {
@@ -15,7 +16,7 @@ class DateError extends Component {
     render() {
         if (this.state.hasError) {      
             return (
-              <h3>Invalid Date</h3>
+              <h2>Invalid Time Value</h2>
             );
         }
         return this.props.children;

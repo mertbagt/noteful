@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import DateError from '../DateError/DateError'
 import Note from '../Note/Note'
 import ApiContext from '../ApiContext'
 import { findNote } from '../notes-helpers'
@@ -23,12 +24,14 @@ export default class NotePageMain extends React.Component {
     const note = findNote(notes, noteId) || { content: '' }
     return (
       <section className='NotePageMain'>
-        <Note
-          id={note.id}
-          name={note.name}
-          modified={note.modified}
-          onDeleteNote={this.handleDeleteNote}
-        />
+        <DateError>
+          <Note
+            id={note.id}
+            name={note.name}
+            modified={note.modified}
+            onDeleteNote={this.handleDeleteNote}
+          />
+        </DateError>
         <div className='NotePageMain__content'>
           {note.content.split(/\n \r|\n/).map((para, i) =>
             <p key={i}>{para}</p>
