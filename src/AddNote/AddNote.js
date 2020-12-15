@@ -140,7 +140,7 @@ export default class AddNote extends React.Component {
                   id="folder"
                   onChange={e => this.updateFolder(e.target.value)}
                 >
-                  <option disabled selected value> -- select an option -- </option>    
+                  <option defaultValue='default'> -- select an option -- </option>    
                   {this.context.folders.map(folder =>
                     
                     <option value={folder.id} key={folder.id}>
