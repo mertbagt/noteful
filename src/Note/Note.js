@@ -28,8 +28,8 @@ export default class Note extends React.Component {
     })
       .then(res => {
         if (!res.ok)
-          return res.json().then(e => Promise.reject(e))
-        return res.json()
+          return res.then(e => Promise.reject(e))
+        return res
       })
       .then(() => {
         this.context.deleteNote(noteId)
@@ -74,13 +74,9 @@ export default class Note extends React.Component {
 }
 
 Note.propTypes = {
-  id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   modified: (props, propName, componentName) => {
     const prop = props[propName];
-//    if(!prop) {
-//      return new Error(`${propName} is required in ${componentName}. Validation Failed`)
-//    }
     if (typeof prop != 'number' && typeof prop != 'string') {
       return new Error(`${propName} is expected to be a number or a string in ${componentName}. ${typeof prop} found.`)
     }
