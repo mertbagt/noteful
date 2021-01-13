@@ -67,17 +67,12 @@ export default class AddNote extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-//        const id = this.state.name.value;
+
         const name = this.state.name.value;
-//        const modified = Date.now();
-//        const folderId = this.state.folder.value;
-//        const folder_id =  folderId.toString();
         const folder_id = this.state.folder.value;
         const content = this.state.content.value;
-    
-//        const newNote = {id, name, modified, folderId, content}
-//        const newNote = { name, folderId, content}
         const newNote = { name, folder_id, content}
+
         fetch(`${config.API_ENDPOINT}/notes`, {
             method: 'POST',
             body: JSON.stringify(newNote),
@@ -85,7 +80,6 @@ export default class AddNote extends React.Component {
               'content-type': 'application/json'
             },
           })
-            .then(console.log (JSON.stringify(newNote)))
             .then(res => {
               if(!res.ok) {
                 throw new Error('Something went wrong, please try again later');
